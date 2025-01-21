@@ -50,9 +50,9 @@ The following collision types are defined:
   - z < a
   - 1 Parameter:
     - a
-- 0bXXX0000000000010
+- 0bXXX0100000000010
   - Immediate Failure
   - Immediately returns that there is no collision
-- 0bXXX0000000000011
+- 0bXXX0100000000011
   - Immediate Success
   - Immediately returns that there is a collision
