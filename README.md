@@ -56,4 +56,6 @@ The following collision types are defined:
 - 0bXXX0100000000011
   - Immediate Success
   - Immediately returns that there is a collision
+ 
+
 In the case where one of these is not the collision check requested, the collision check will immediately fail.
