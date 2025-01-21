@@ -1,3 +1,8 @@
+# No-Dot Files
+*
+!/**/
+!*.*
+
 # Prerequisites
 *.d
 
