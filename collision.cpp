@@ -25,11 +25,11 @@ bool check(float x, float y, float z, void* collisionData) {
     f32 a;
     f32 b;
     f32 c;
+    f32 d;
     size_t loc = 0;
     while (true) {
         instruction = get_u16;
         inc_u16;
-        std::cout << "0x" << std::hex << instruction << std::endl;
         switch (instruction & 0x1FFF) {
             case 0x1000: { // Planar X
                 if (!(instruction & 0x2000)) {
@@ -84,6 +84,113 @@ bool check(float x, float y, float z, void* collisionData) {
                     inc_u16;
                 }
                 if (a < z) {
+                    if (instruction & 0x8000) return true; // Success on top
+                    loc += offset;
+                } else {
+                    if (instruction & 0x4000) return true; // Success on bottom
+                }
+                break;
+            }
+            case 0x0001: { // XY plane
+                if (!(instruction & 0x2000)) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                reader = get_u32;
+                a = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                b = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                c = *(f32*)&reader;
+                inc_u32;
+                if (instruction & 0x2000) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                if (a * x + b * y > c) {
+                    if (instruction & 0x8000) return true; // Success on top
+                    loc += offset;
+                } else {
+                    if (instruction & 0x4000) return true; // Success on bottom
+                }
+                break;
+            }
+            case 0x0002: { // YZ plane
+                if (!(instruction & 0x2000)) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                reader = get_u32;
+                a = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                b = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                c = *(f32*)&reader;
+                inc_u32;
+                if (instruction & 0x2000) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                if (a * y + b * z > c) {
+                    if (instruction & 0x8000) return true; // Success on top
+                    loc += offset;
+                } else {
+                    if (instruction & 0x4000) return true; // Success on bottom
+                }
+                break;
+            }
+            case 0x0003: { // XZ plane
+                if (!(instruction & 0x2000)) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                reader = get_u32;
+                a = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                b = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                c = *(f32*)&reader;
+                inc_u32;
+                if (instruction & 0x2000) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                if (a * x + b * z > c) {
+                    if (instruction & 0x8000) return true; // Success on top
+                    loc += offset;
+                } else {
+                    if (instruction & 0x4000) return true; // Success on bottom
+                }
+                break;
+            }
+            case 0x0000: { // 3D plane
+                if (!(instruction & 0x2000)) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                reader = get_u32;
+                a = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                b = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                c = *(f32*)&reader;
+                inc_u32;
+                reader = get_u32;
+                d = *(f32*)&reader;
+                inc_u32;
+                if (instruction & 0x2000) {
+                    offset = get_u16;
+                    inc_u16;
+                }
+                if (a * x + b * y + z * c > d) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {

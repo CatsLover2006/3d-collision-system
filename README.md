@@ -8,7 +8,7 @@ The third most significant bit decides where the 16-bit integer offset is presen
 The following collision types are defined:
 - 0bXXX0000000000000
   - 3D Plane Collision
-  - ax + by + cz < m
+  - ax + by + cz > m
   - 4 Parameters:
     - a
     - b
@@ -16,38 +16,38 @@ The following collision types are defined:
     - m
 - 0bXXX0000000000001
   - 2D Plane Collision: X-Y
-  - ax + by < m
+  - ax + by > m
   - 3 Parameters:
     - a
     - b
     - m
 - 0bXXX0000000000010
   - 2D Plane Collision: Y-Z
-  - ay + bz < m
+  - ay + bz > m
   - 3 Parameters:
     - a
     - b
     - m
 - 0bXXX0000000000011
   - 2D Plane Collision: X-Z
-  - ax + bz < m
+  - ax + bz > m
   - 3 Parameters:
     - a
     - b
     - m
 - 0bXXX1000000000000
   - Planar Collision: X
-  - x < a
+  - x > a
   - 1 Parameter:
     - a
 - 0bXXX1010000000000
   - Planar Collision: Y
-  - y < a
+  - y > a
   - 1 Parameter:
     - a
 - 0bXXX1100000000000
   - Planar Collision: Z
-  - z < a
+  - z > a
   - 1 Parameter:
     - a
 - 0bXXX0100000000010
