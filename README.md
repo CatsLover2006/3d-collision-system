@@ -7,20 +7,49 @@ If a collision is exactly on the plane, it will assume the difference is negativ
 The third most significant bit decides where the 16-bit integer offset is present relative to the parameters of the collision type. If it is set, the offset will be after the parameters; if it is not set, the offset will be before the parameters. If the most significant bit is set, this bit is ignored as the offset will not be present. This should only be used to align the parameters to 32-bit boundaries to avoid trying to read from misaligned memory.  
 The following collision types are defined:
 - 0bXXX0000000000000
-  - Basic 3D Plane Collision
-  - ax + by + cz + m
+  - 3D Plane Collision
+  - ax + by + cz < m
   - 4 Parameters:
     - a
     - b
     - c
     - m
 - 0bXXX0000000000001
-  - Basic 2D Plane Collision
-  - ax + by + m
+  - 2D Plane Collision: X-Y
+  - ax + by < m
   - 3 Parameters:
     - a
     - b
     - m
+- 0bXXX0000000000010
+  - 2D Plane Collision: Y-Z
+  - ay + bz < m
+  - 3 Parameters:
+    - a
+    - b
+    - m
+- 0bXXX0000000000011
+  - 2D Plane Collision: X-Z
+  - ax + bz < m
+  - 3 Parameters:
+    - a
+    - b
+    - m
+- 0bXXX1000000000000
+  - Planar Collision: X
+  - x < a
+  - 1 Parameter:
+    - a
+- 0bXXX1010000000000
+  - Planar Collision: Y
+  - y < a
+  - 1 Parameter:
+    - a
+- 0bXXX1100000000000
+  - Planar Collision: Z
+  - z < a
+  - 1 Parameter:
+    - a
 - 0bXXX0000000000010
   - Immediate Failure
   - Immediately returns that there is no collision
