@@ -10,6 +10,8 @@
 #include <cstdio>
 #include <iostream>
 
+#include <cfloat>
+
 // Define simplified value types
 #define u16 uint16_t
 #define u32 uint32_t
@@ -19,6 +21,18 @@
 #define inc_u16 loc += sizeof(u16)
 #define get_u32 ntohl(*((u32*) (data + loc)))
 #define inc_u32 loc += sizeof(u32)
+
+#if (UINT16_MAX != 65535)
+#error "16 bit integer isn't 16 bits long"
+#endif
+
+#if (UINT32_MAX != 4294967295)
+#error "32 bit integer isn't 32 bits long"
+#endif
+
+#if (FLT_MANT_DIG != 24 || FLT_MAX_EXP != 128)
+#warning "float isn't using IEEE 754"
+#endif
 
 namespace hailLib {
 namespace collision {
