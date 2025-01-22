@@ -1,3 +1,9 @@
+/**
+ *  @file collision.cpp
+ *
+ *  @author Half-Qilin AKA Hail AKA CatsLover2006
+ */
+
 #include "collision.h"
 #include <cstdlib>
 #include <cstdint>
@@ -17,7 +23,7 @@
 namespace hailLib {
 namespace collision {
 
-bool check(float x, float y, float z, void* collisionData) {
+bool check(point p, void* collisionData) {
     char* data = (char*) collisionData;
     u16 offset;
     u16 instruction;
@@ -43,7 +49,7 @@ bool check(float x, float y, float z, void* collisionData) {
                     offset = get_u16;
                     inc_u16;
                 }
-                if (a < x) {
+                if (a < p.x) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {
@@ -63,7 +69,7 @@ bool check(float x, float y, float z, void* collisionData) {
                     offset = get_u16;
                     inc_u16;
                 }
-                if (a < y) {
+                if (a < p.y) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {
@@ -83,7 +89,7 @@ bool check(float x, float y, float z, void* collisionData) {
                     offset = get_u16;
                     inc_u16;
                 }
-                if (a < z) {
+                if (a < p.z) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {
@@ -109,7 +115,7 @@ bool check(float x, float y, float z, void* collisionData) {
                     offset = get_u16;
                     inc_u16;
                 }
-                if (a * x + b * y > c) {
+                if (a * p.x + b * p.y > c) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {
@@ -135,7 +141,7 @@ bool check(float x, float y, float z, void* collisionData) {
                     offset = get_u16;
                     inc_u16;
                 }
-                if (a * y + b * z > c) {
+                if (a * p.y + b * p.z > c) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {
@@ -161,7 +167,7 @@ bool check(float x, float y, float z, void* collisionData) {
                     offset = get_u16;
                     inc_u16;
                 }
-                if (a * x + b * z > c) {
+                if (a * p.x + b * p.z > c) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {
@@ -190,7 +196,7 @@ bool check(float x, float y, float z, void* collisionData) {
                     offset = get_u16;
                     inc_u16;
                 }
-                if (a * x + b * y + z * c > d) {
+                if (a * p.x + b * p.y + p.z * c > d) {
                     if (instruction & 0x8000) return true; // Success on top
                     loc += offset;
                 } else {

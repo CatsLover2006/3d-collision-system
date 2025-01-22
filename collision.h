@@ -1,5 +1,13 @@
+/**
+ *  @file collision.h
+ *
+ *  @author Half-Qilin AKA Hail AKA CatsLover2006
+ */
+
 #ifndef HAIL_LIB_COLLISIONSYS_H
 #define HAIL_LIB_COLLISIONSYS_H
+
+#include "point.h"
 
 namespace hailLib {
 namespace collision {
@@ -11,7 +19,7 @@ namespace collision {
  * @param z z-value of point
  * @param collisionData pointer to the start of collision data
  */
-bool check(float x, float y, float z, void* collisionData);
+bool check(point p, void* collisionData);
 
 }
 }
